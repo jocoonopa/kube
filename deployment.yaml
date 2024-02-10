@@ -1,0 +1,59 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-deployment
+  labels:
+    type: demo
+spec:
+  # 這裡我們將 Pod Replicas 設定為 2!
+  # ============================ #
+  replicas: 2
+  # ============================ #
+  selector:
+    matchLabels:
+      type: demo
+  template:
+    metadata:
+      labels:
+        type: demo
+    spec:
+      containers:
+        - name: foo
+          # 將版號改成不存在的 v1
+          # ============================ #
+          image: "mikehsu0618/foo: v1"
+          # ============================ #
+          ports:
+            - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-deployment
+  labels:
+    type: demo
+spec:
+  # 這裡我們將 Pod Replicas 設定為 2!
+  # ============================ #
+  replicas: 2
+  # ============================ #
+  selector:
+    matchLabels:
+      type: demo
+  template:
+    metadata:
+      labels:
+        type: demo
+    spec:
+      containers:
+        - name: bar
+          image: mikehsu0618/bar
+          ports:
+            - containerPort: 8080
+
+
+
+
+
+
